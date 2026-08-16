@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cafeteria Aroma // Ejemplo de landing page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Caveat:wght@600;700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f6ede1;
+    --paper:#efe2cf;
+    --ink:#2c241b;
+    --ink-soft:#5c5142;
+    --petrol:#1f4b43;
+    --petrol-dark:#123832;
+    --mustard:#d9a441;
+    --blush:#e7b9ab;
+    --radius:22px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--cream); color:var(--ink); font-family:'Work Sans',sans-serif; line-height:1.6; overflow-x:hidden;}
+  h1,h2,h3{font-family:'Fraunces',serif;}
+  .script{font-family:'Caveat',cursive;}
+  a{color:inherit; text-decoration:none;}
+  section{padding:80px clamp(20px,6vw,90px);}
+
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px clamp(20px,6vw,90px);
+    position:sticky; top:0; z-index:40;
+    background:rgba(246,237,225,0.9); backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(44,36,27,0.08);
+  }
+  .logo{font-size:22px; font-weight:700; display:flex; align-items:center; gap:8px;}
+  .logo .berry{width:10px; height:10px; border-radius:50%; background:var(--mustard);}
+  .nav-links{display:flex; gap:30px; font-size:14.5px; font-weight:500;}
+  .nav-links a{position:relative; padding-bottom:2px;}
+  .nav-links a:hover{color:var(--petrol);}
+  @media (max-width:680px){ .nav-links{display:none;} }
+  .nav-cta{
+    background:var(--petrol); color:var(--cream); padding:10px 20px; border-radius:30px;
+    font-size:13.5px; font-weight:600; transition:.2s;
+  }
+  .nav-cta:hover{background:var(--petrol-dark);}
+
+  /* HERO */
+  .hero{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;
+    padding-top:70px; padding-bottom:60px;
+  }
+  @media (max-width:860px){ .hero{grid-template-columns:1fr;} }
+  .hero-eyebrow{
+    font-family:'Caveat',cursive; font-size:24px; color:var(--petrol); font-weight:700; margin-bottom:6px; display:inline-block;
+    position:relative;
+  }
+  .hero h1{font-size:clamp(38px,5.5vw,64px); font-weight:600; line-height:1.05; letter-spacing:-0.01em;}
+  .hero h1 em{font-style:italic; color:var(--petrol); font-weight:400;}
+  .hero p{color:var(--ink-soft); font-size:17px; max-width:44ch; margin:22px 0 30px;}
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{padding:14px 26px; border-radius:30px; font-weight:600; font-size:14.5px; display:inline-flex; align-items:center; gap:8px; transition:.2s;}
+  .btn-primary{background:var(--petrol); color:var(--cream);}
+  .btn-primary:hover{background:var(--petrol-dark); transform:translateY(-2px);}
+  .btn-outline{border:1.5px solid var(--ink); color:var(--ink);}
+  .btn-outline:hover{background:var(--ink); color:var(--cream);}
+
+  .hero-visual{position:relative; aspect-ratio:1/1; max-width:420px; margin:0 auto;}
+  .blob{
+    position:absolute; inset:0; border-radius:58% 42% 63% 37% / 41% 55% 45% 59%;
+    background:linear-gradient(150deg, var(--blush), var(--mustard));
+  }
+  .cup{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  }
+  .cup svg{width:62%; height:62%;}
+  .steam{stroke:var(--cream); stroke-width:5; fill:none; stroke-linecap:round; opacity:0.85;}
+  .doodle-ring{
+    position:absolute; width:74px; height:74px; border:3px solid var(--petrol); border-radius:50%;
+    top:-18px; right:-10px; opacity:0.65;
+  }
+
+  /* MARQUEE */
+  .marquee{
+    background:var(--ink); color:var(--cream); padding:16px 0; overflow:hidden; white-space:nowrap;
+  }
+  .marquee-track{display:inline-block; font-family:'Fraunces',serif; font-size:17px; animation:scroll 22s linear infinite;}
+  .marquee-track span{margin:0 26px; color:var(--mustard);}
+  @keyframes scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+  /* MENU */
+  .sec-label{font-family:'Caveat',cursive; font-size:22px; color:var(--petrol); font-weight:700;}
+  .sec-title{font-size:clamp(28px,4vw,42px); font-weight:600; margin:6px 0 44px;}
+
+  .menu-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:26px;}
+  .menu-card{
+    background:var(--paper); border-radius:var(--radius); padding:28px;
+    position:relative; transition:transform .25s;
+  }
+  .menu-card:hover{transform:translateY(-5px);}
+  .menu-icon{
+    width:52px; height:52px; border-radius:16px; display:flex; align-items:center; justify-content:center;
+    background:var(--petrol); color:var(--cream); font-size:22px; margin-bottom:18px;
+  }
+  .menu-card h3{font-size:20px; font-weight:600; margin-bottom:8px;}
+  .menu-card p{color:var(--ink-soft); font-size:14.5px; margin-bottom:14px;}
+  .menu-price{font-family:'Fraunces',serif; font-size:19px; font-weight:600; color:var(--petrol);}
+
+  /* ABOUT */
+  .about{display:grid; grid-template-columns:0.9fr 1.1fr; gap:60px; align-items:center;}
+  @media (max-width:860px){ .about{grid-template-columns:1fr;} }
+  .about-card{background:var(--petrol); color:var(--cream); border-radius:var(--radius); padding:44px; position:relative;}
+  .about-card .script{font-size:26px; color:var(--mustard); display:block; margin-bottom:10px;}
+  .about-card h3{font-size:26px; font-weight:600; margin-bottom:14px;}
+  .about-card p{opacity:0.85; font-size:15px;}
+  .about-text p{color:var(--ink-soft); font-size:16px; margin-bottom:16px; max-width:56ch;}
+  .stat-row{display:flex; gap:34px; margin-top:24px; flex-wrap:wrap;}
+  .stat b{font-family:'Fraunces',serif; font-size:28px; display:block; color:var(--petrol);}
+  .stat span{font-size:13px; color:var(--ink-soft);}
+
+  /* TESTIMONIALS */
+  .testi-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px;}
+  .testi-card{background:var(--cream); border:1.5px solid var(--paper); border-radius:var(--radius); padding:28px;}
+  .testi-card p{font-family:'Fraunces',serif; font-size:17px; font-style:italic; margin-bottom:16px;}
+  .testi-name{font-size:13.5px; font-weight:600; color:var(--petrol);}
+
+  /* CONTACT */
+  .contact{
+    background:var(--ink); color:var(--cream); border-radius:var(--radius);
+    padding:clamp(40px,6vw,64px); display:grid; grid-template-columns:1fr 1fr; gap:40px;
+  }
+  @media (max-width:760px){ .contact{grid-template-columns:1fr;} }
+  .contact h2{font-size:clamp(26px,3.6vw,36px); font-weight:600; margin-bottom:14px;}
+  .contact p{opacity:0.75; font-size:15px; max-width:40ch; margin-bottom:24px;}
+  .contact-info div{margin-bottom:14px; font-size:14.5px;}
+  .contact-info b{display:block; font-family:'Fraunces',serif; font-size:15px; margin-bottom:2px; color:var(--mustard);}
+
+  footer{padding:30px clamp(20px,6vw,90px); text-align:center; color:var(--ink-soft); font-size:13px;}
+
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:none;}
+  @media (prefers-reduced-motion:reduce){ .reveal{opacity:1; transform:none;} .marquee-track{animation:none;} }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="logo"><span class="berry"></span>Aroma</div>
+  <div class="nav-links">
+    <a href="#menu">Carta</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#opiniones">Opiniones</a>
+    <a href="#visitanos">Visitanos</a>
+  </div>
+  <a href="#visitanos" class="nav-cta">Reservar mesa</a>
+</nav>
+
+<section class="hero">
+  <div>
+    <span class="hero-eyebrow">cafe de especialidad, hecho a mano</span>
+    <h1>El primer cafe del dia <em>sabe mejor</em> aqui.</h1>
+    <p>Tostamos nuestro propio grano y horneamos cada manana. Un sitio pequeno pensado para quedarse un rato mas de la cuenta.</p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn btn-primary">Ver la carta</a>
+      <a href="#visitanos" class="btn btn-outline">Como llegar</a>
+    </div>
+  </div>
+  <div class="hero-visual reveal">
+    <div class="blob"></div>
+    <div class="doodle-ring"></div>
+    <div class="cup">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 45 h56 l-6 42 a10 10 0 0 1 -10 9 h-24 a10 10 0 0 1 -10 -9 z" fill="#2c241b"/>
+        <path d="M84 52 h10 a10 10 0 0 1 0 20 h-8" fill="none" stroke="#2c241b" stroke-width="5"/>
+        <path class="steam" d="M45 38 q-6 -10 0 -18" />
+        <path class="steam" d="M60 38 q-6 -10 0 -18" style="opacity:0.6"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>tueste propio</span> pan de masa madre <span>cada manana</span> comercio de proximidad <span>grano de origen</span> pan de masa madre <span>tueste propio</span> comercio de proximidad <span>grano de origen</span>
+  </div>
+</div>
+
+<section id="menu">
+  <span class="sec-label">la carta</span>
+  <h2 class="sec-title">Lo mas pedido</h2>
+  <div class="menu-grid">
+    <div class="menu-card reveal">
+      <div class="menu-icon">1</div>
+      <h3>Flat white</h3>
+      <p>Espresso doble con leche microespumada, suave y equilibrado.</p>
+      <div class="menu-price">2,80 EUR</div>
+    </div>
+    <div class="menu-card reveal">
+      <div class="menu-icon">2</div>
+      <h3>Croissant de mantequilla</h3>
+      <p>Hojaldrado a mano cada madrugada, horneado por tandas pequenas.</p>
+      <div class="menu-price">2,20 EUR</div>
+    </div>
+    <div class="menu-card reveal">
+      <div class="menu-icon">3</div>
+      <h3>Tostada de aguacate</h3>
+      <p>Pan de masa madre, aguacate, lima y un toque de chile.</p>
+      <div class="menu-price">5,50 EUR</div>
+    </div>
+    <div class="menu-card reveal">
+      <div class="menu-icon">4</div>
+      <h3>Cold brew</h3>
+      <p>Infusion en frio durante 18 horas, suave y con poco amargor.</p>
+      <div class="menu-price">3,20 EUR</div>
+    </div>
+  </div>
+</section>
+
+<section id="nosotros">
+  <div class="about">
+    <div class="about-card reveal">
+      <span class="script">nuestra historia</span>
+      <h3>Un proyecto de barrio</h3>
+      <p>Aroma nacio como un pequeno local pensado para vecinos, con la idea de cuidar cada detalle: del grano a la taza, del pan al plato.</p>
+    </div>
+    <div class="about-text">
+      <span class="sec-label">sobre nosotros</span>
+      <h2 class="sec-title">Cafe con calma, sin prisa</h2>
+      <p>Trabajamos con productores que conocemos por su nombre y horneamos en el mismo local cada manana. Todo lo que servimos esta pensado para disfrutarse despacio.</p>
+      <div class="stat-row">
+        <div class="stat"><b>8</b><span>anos abierto</span></div>
+        <div class="stat"><b>12</b><span>variedades de cafe</span></div>
+        <div class="stat"><b>100%</b><span>horneado in situ</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="opiniones">
+  <span class="sec-label">opiniones</span>
+  <h2 class="sec-title">Lo que dicen de nosotros</h2>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <p>"El mejor flat white de la zona, sin ninguna duda. Ademas el sitio invita a quedarse."</p>
+      <div class="testi-name">Elena R.</div>
+    </div>
+    <div class="testi-card reveal">
+      <p>"Vengo cada sabado por el croissant. Se nota que lo hacen con calma."</p>
+      <div class="testi-name">David M.</div>
+    </div>
+    <div class="testi-card reveal">
+      <p>"Un ambiente muy acogedor para trabajar un rato con el portatil."</p>
+      <div class="testi-name">Lucia P.</div>
+    </div>
+  </div>
+</section>
+
+<section id="visitanos">
+  <div class="contact reveal">
+    <div>
+      <h2>Ven a probarlo</h2>
+      <p>Abrimos todos los dias desde primera hora. Te esperamos con la cafetera encendida.</p>
+      <a href="#" class="btn" style="background:var(--mustard); color:var(--ink);">Reservar mesa</a>
+    </div>
+    <div class="contact-info">
+      <div><b>Direccion</b>Calle del Ejemplo 12, Santander</div>
+      <div><b>Horario</b>Lunes a domingo, 8:00 - 20:00</div>
+      <div><b>Telefono</b>+34 600 000 000</div>
+    </div>
+  </div>
+</section>
+
+<footer>Pagina de ejemplo creada como muestra de portfolio &middot; Aroma Cafeteria</footer>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.15});
+  els.forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
